@@ -39,20 +39,20 @@
 	<section id="top">
 		<div class="container">
 			<div class="row">
-				<div class="col-md-7">
+				<div class="col-md-8">
 					<p class="contact-action"><i class="fa fa-phone-square"></i>IN CASE OF ANY QUESTIONS, CALL THIS NUMBER: <strong>+565 975 658</strong></p>
 				</div>
-				<div class="col-md-3 clearfix">
+				<div class="col-md-2 clearfix">
 					<ul class="login-cart">
-					<li>
+						<li>
 							<?php if(isset($_SESSION['status'])==false){?>
 							<a data-toggle="modal" data-target="#myModal" href="#">
-								<i class="fa fa-user"></i>
+							<i class="fa fa-user"></i>
 								Login / Register
 							</a>
 							<?php }else{?>
-								<a  href="admin/logout.php">
-								<i class="fa fa-user"></i>
+							<a  href="admin/logout.php">
+							<i class="fa fa-user"></i>
 								Logout
 							</a>
 							<?php }?>
@@ -62,11 +62,10 @@
 				<div class="col-md-2">
 					<div class="search-box">
 						<div class="input-group">
-					    	<input placeholder="Search Here" type="text" class="form-control">
-					      	<span class="input-group-btn">
-					        	<button class="btn btn-default" type="button"></button>
-					      	</span>
-					    </div><!-- /.input-group -->
+						<form class="form-inline" method="post" action="search.php" >
+					    	<input name="search" placeholder="Search Here" type="text" class="form-control">
+						</form>
+					    </div><!--/.input-group-->
 					</div><!-- /.search-box -->
 				</div>
 			</div> <!-- End Of /.row -->
@@ -96,8 +95,8 @@
 											<input placeholder="E-mail address"  type="text" id="email_create" name="email_create" value="" class="account_input" required>
 					                    </span>
 									</p>
-									<p class="submit">
-										<button class="btn btn-primary">Create Your Account</button>
+									<p class="submit" >
+										<button class="btn btn-primary" >Create Your Account</button>
 									</p>
 								</div>
 							</fieldset>
@@ -114,33 +113,12 @@
 									<label for="passwd">Password</label>
 										<span><input placeholder="Password" type="password" id="passwd" name="passwd" value="" class="account_input"></span>
 									</p>
-									<p class="lost_password">
-										<a href="#popab-password-reset" class="popab-password-link">Forgot your password?</a>
-									</p>
 									<p class="submit">
 										<button class="btn btn-success">Log in</button>
 									</p>
 								</div>
 							</fieldset>
 						</form>
-			      	</div>
-			      	<div class="modal-footer">
-			        	<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-			      	</div>
-		    	</div>
-		  	</div>
-		</div>	
-
-		<!-- Thanks for rating modal -->
-		<div class="modal fade" id="ModalSub" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-			<div class="modal-dialog">
-		    	<div class="modal-content">
-		    		<div class="modal-header">
-		        		<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-		        		<h4 class="modal-title" id="myModalLabel">Terima kasih sudah mengisi polling</h4>
-		      		</div>
-			      	<div class="modal-body clearfix">
-					  <h6>Apakah anda yakin dengan jawaban anda?</h6>
 			      	</div>
 			      	<div class="modal-footer">
 			        	<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
@@ -278,9 +256,9 @@
                             </div>
                             <br>
                             <input type="button" name="previous" class="previous btn btn-default" value="Previous" />
-                            <a data-toggle="modal" data-target="#ModalSub" href="#">
+                            <!-- <a data-toggle="modal" data-target="#ModalSub" href="#"> -->
 							<input type="submit" name="submit" class="submit btn btn-success" value="Submit" />   
-							</a> 
+							<!-- </a>  -->
                         </fieldset>
                         </form> 
 					</div>
@@ -381,15 +359,15 @@
 <script>
     $(document).ready(function(){
     var current = 1,current_step,next_step,steps;
-    next_step = $(this).parent().next();
-    next_step.hide();
-    steps = $("fieldset").length;
+	current_step = $(this).parent();
+    // next_step = $(this).parent().next();
+    // next_step.hide();
+    // steps = $("fieldset").length;
     $(".next").click(function(){
         current_step = $(this).parent();
         next_step = $(this).parent().next();
         next_step.show();
         current_step.hide();
-        setProgressBar(++current);
     });
     $(".previous").click(function(){
         current_step = $(this).parent();

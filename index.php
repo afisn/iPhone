@@ -52,26 +52,20 @@
 	<section id="top">
 		<div class="container">
 			<div class="row">
-				<div class="col-md-7">
+				<div class="col-md-8">
 					<p class="contact-action"><i class="fa fa-phone-square"></i>IN CASE OF ANY QUESTIONS, CALL THIS NUMBER: <strong>+565 975 658</strong></p>
 				</div>
-				<div class="col-md-3 clearfix">
+				<div class="col-md-2 clearfix">
 					<ul class="login-cart">
-						<!-- <li>
+						<li>
+							<?php if(isset($_SESSION['status'])==false){?>
 							<a data-toggle="modal" data-target="#myModal" href="#">
 							<i class="fa fa-user"></i>
 								Login / Register
 							</a>
-						</li> -->
-						<li>
-							<?php if(isset($_SESSION['status'])==false){?>
-							<a data-toggle="modal" data-target="#myModal" href="#">
-								<i class="fa fa-user"></i>
-								Login / Register
-							</a>
 							<?php }else{?>
-								<a  href="admin/logout.php">
-								<i class="fa fa-user"></i>
+							<a  href="admin/logout.php">
+							<i class="fa fa-user"></i>
 								Logout
 							</a>
 							<?php }?>
@@ -81,11 +75,10 @@
 				<div class="col-md-2">
 					<div class="search-box">
 						<div class="input-group">
-					    	<input action="search.php" placeholder="Search Here" type="text" class="form-control">
-					      	<span class="input-group-btn">
-					        	<button class="btn btn-default" type="button"></button>
-					      	</span>
-					    </div><!-- /.input-group -->
+						<form class="form-inline" method="post" action="search.php" >
+					    	<input name="search" placeholder="Search Here" type="text" class="form-control">
+						</form>
+					    </div><!--/.input-group-->
 					</div><!-- /.search-box -->
 				</div>
 			</div> <!-- End Of /.row -->
@@ -184,12 +177,19 @@
 
 		    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
 		      	<ul class="nav navbar-nav nav-main">
-		        	<li class="active"><a href="#">Home</a></li>
+				  <?php if(isset($_SESSION['status'])==true){?>
+					<li class="active"><a href="#">Home</a></li>
 					<li><a href="products.php">Product</a></li>
 					<li><a href="news.php">News</a></li>
 					<li><a href="shopping.php">Shopping Cart</a></li>
 					<li><a href="rate.php">Rate</a></li>
 					
+					<?php }else{?>
+						<li class="active"><a href="#">Home</a></li>
+						<li><a href="products.php">Product</a></li>
+						<li><a href="news.php">News</a></li>
+					<?php }?>
+
 		        </ul> <!-- End of /.nav-main -->
 		    </div>	<!-- /.navbar-collapse -->
 		</div>	<!-- /.container-fluid -->

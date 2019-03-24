@@ -11,8 +11,9 @@
          $eksekusi = ($query);
 
          if (mysqli_query($con, $eksekusi)) {		
-				header('Location: http://localhost/iphone/index.php');
-				echo "sudah";
+				// header('Location: http://localhost/iphone/index.php');
+				echo '<script>alert("Terima kasih sudah isi")</script>';
+				echo '<script>window.location="index.php"</script>';  
 			} else {
 				echo "Error: " . $sql . "<br>" . mysqli_error($con);
 			} 

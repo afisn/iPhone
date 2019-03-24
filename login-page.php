@@ -16,7 +16,7 @@
 				$_SESSION['status'] = "login";
 				echo '<script>alert("Selamat datang!")</script>';  
 				echo '<script>window.location="index.php"</script>'; 
-				header("location:http://localhost/iphone/index.php");
+				// header("location:http://localhost/iphone/index.php");
 			}else{
 				echo '<script>alert("Username & Password Salah")</script>';  
 				echo '<script>window.location="index.php"</script>'; 

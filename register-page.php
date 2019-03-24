@@ -22,10 +22,12 @@
          $eksekusi = ($query);
 
          if (mysqli_query($con, $eksekusi)) {		
-				header('Location: http://localhost/iphone/index.php');
+				
 				echo "<script type=\"text/javascript\">".
         				"alert('success');".
-        			"</script>";
+					"</script>";
+				echo '<script>window.location="index.php"</script>'; 
+				// header('Location: http://localhost/iphone/index.php');
 			} else {
 				echo "Error: " . $sql . "<br>" . mysqli_error($con);
 			} 

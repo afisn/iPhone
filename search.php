@@ -8,7 +8,8 @@
 	<!-- Fonts -->
 	<link href='http://fonts.googleapis.com/css?family=Open+Sans:400,300,600,700' rel='stylesheet' type='text/css'>
 	<link href='http://fonts.googleapis.com/css?family=Yanone+Kaffeesatz:400,700' rel='stylesheet' type='text/css'>
-
+	<link href="//maxcdn.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css" rel="stylesheet">
+	
 	<!-- Css -->
 	<link rel="stylesheet" href="css/nivo-slider.css" type="text/css" />
 	<link rel="stylesheet" href="css/owl.carousel.css">
@@ -38,20 +39,20 @@
 	<section id="top">
 		<div class="container">
 			<div class="row">
-				<div class="col-md-7">
+				<div class="col-md-8">
 					<p class="contact-action"><i class="fa fa-phone-square"></i>IN CASE OF ANY QUESTIONS, CALL THIS NUMBER: <strong>+565 975 658</strong></p>
 				</div>
-				<div class="col-md-3 clearfix">
+				<div class="col-md-2 clearfix">
 					<ul class="login-cart">
-					<li>
+						<li>
 							<?php if(isset($_SESSION['status'])==false){?>
 							<a data-toggle="modal" data-target="#myModal" href="#">
-								<i class="fa fa-user"></i>
+							<i class="fa fa-user"></i>
 								Login / Register
 							</a>
 							<?php }else{?>
-								<a  href="admin/logout.php">
-								<i class="fa fa-user"></i>
+							<a  href="admin/logout.php">
+							<i class="fa fa-user"></i>
 								Logout
 							</a>
 							<?php }?>
@@ -61,11 +62,10 @@
 				<div class="col-md-2">
 					<div class="search-box">
 						<div class="input-group">
-					    	<input placeholder="Search Here" type="text" class="form-control">
-					      	<span class="input-group-btn">
-					        	<button class="btn btn-default" type="button"></button>
-					      	</span>
-					    </div><!-- /.input-group -->
+						<form class="form-inline" method="post" action="search.php" >
+					    	<input name="search" placeholder="Search Here" type="text" class="form-control">
+						</form>
+					    </div><!--/.input-group-->
 					</div><!-- /.search-box -->
 				</div>
 			</div> <!-- End Of /.row -->
@@ -84,7 +84,7 @@
 		      		</div>
 			      	<div class="modal-body clearfix">
 
-						<form action="register.html" method="post" id="create-account_form" class="std">
+						<form action="register.php" method="post" id="create-account_form" class="std">
 							<fieldset>
 								<h3>Create your account</h3>
 								<div class="form_content clearfix">
@@ -92,11 +92,11 @@
 									<p class="text">
 										<label for="email_create">E-mail address</label>
 										<span>
-											<input placeholder="E-mail address"  type="text" id="email_create" name="email_create" value="" class="account_input">
+											<input placeholder="E-mail address"  type="text" id="email_create" name="email_create" value="" class="account_input" required>
 					                    </span>
 									</p>
-									<p class="submit">
-										<button class="btn btn-primary">Create Your Account</button>
+									<p class="submit" >
+										<button class="btn btn-primary" >Create Your Account</button>
 									</p>
 								</div>
 							</fieldset>
@@ -112,9 +112,6 @@
 									<p class="text">
 									<label for="passwd">Password</label>
 										<span><input placeholder="Password" type="password" id="passwd" name="passwd" value="" class="account_input"></span>
-									</p>
-									<p class="lost_password">
-										<a href="#popab-password-reset" class="popab-password-link">Forgot your password?</a>
 									</p>
 									<p class="submit">
 										<button class="btn btn-success">Log in</button>
@@ -167,11 +164,18 @@
 
 		    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
 		      	<ul class="nav navbar-nav nav-main">
-				  	<li ><a href="index.php">Home</a></li>
-					<li ><a href="products.php">Product</a></li>
+				  <?php if(isset($_SESSION['status'])==true){?>
+					<li ><a href="index.php">Home</a></li>
+					<li><a href="products.php">Product</a></li>
 					<li><a href="news.php">News</a></li>
-					<li><a href="blog.html">Shopping Cart</a></li>
-					<li><a href="blog-single.html">Rate</a></li>
+					<li><a href="shopping.php">Shopping Cart</a></li>
+					<li><a href="rate.php">Rate</a></li>
+					
+					<?php }else{?>
+						<li><a href="index.php">Home</a></li>
+						<li><a href="products.php">Product</a></li>
+						<li><a href="news.php">News</a></li>
+					<?php }?>
 					
 		        </ul> <!-- End of /.nav-main -->
 		    </div>	<!-- /.navbar-collapse -->
@@ -187,16 +191,9 @@
 		<div class="container">
 			<div class="row">
 				<div class="col-md-4">
-					<h1>Products Details</h1>
+					<h1>Searching Result</h1>
 					<p></p>
 				</div>	<!-- /.col-md-4 -->
-				<div class="col-md-8 hidden-xs">
-					<ol class="breadcrumb pull-right">
-					  	<li><a href="index.php">Home</a></li>
-					  	<li><a href="products.php">Products</a></li>
-					  	<li class="active">Single Products</li>
-					</ol>
-				</div> <!-- /.col-md-8 -->
 			</div>	<!-- /.row -->
 		</div>	<!-- /.container-->
 	</section><!-- /Section -->
@@ -204,8 +201,13 @@
 	<!-- Ambil gambar dari database -->
 	<?php
 		include 'koneksi.php';
-		$getProduk=mysqli_query($con, "SELECT * FROM tb_produk WHERE id_produk=1") or die("Could not retrieve image: " .mysqli_error($conn));
-		$row =mysqli_fetch_assoc($getProduk) 
+		if(!isset($_POST['search'])){
+			// header("location:localhost/iphone/index.php");
+		}
+		$search_query=mysqli_query($con, "SELECT * FROM	tb_produk WHERE	tipe_iphone LIKE '%".$_POST['search']."%'") or die("Could not retrieve image: " .mysqli_error($conn));
+		if(mysqli_num_rows($search_query) != 0){
+		$row =mysqli_fetch_assoc($search_query);
+		}
 	?>
 
 	<section id="single-product">
@@ -213,22 +215,43 @@
 			<div class="row">
 				<div class="col-md-1">
 				</div>	
-				<div class="col-md-2">
-					<div class="single-product-img">
-						<img src="<?php echo $row['gambar']; ?>">
-					</div>
-
+				<div class="col-md-12">
+					<div class="single-product-img">  
+					<table class="table table-bordered">  
+                            <tr>  
+                                <th width="20%">Tipe iPhone</th>  
+                                <th width="10%">Tahun</th>  
+                                <th width="10%">Harga</th>  
+                                <th width="40%">Spesifikasi</th>  
+                            </tr> 
+							<?php 
+								if (mysqli_num_rows($search_query)!=0)
+								{ do
+									{
+							?> 
+							<tr>  
+                                <td><?php echo $row['tipe_iphone']; ?></td>  
+                                <td><?php echo $row['tahun']; ?></td>  
+                                <td>Rp <?php echo number_format($row['harga']); ?></td>  
+                                <td><?php echo $row['spesifikasi']; ?></td>  
+                            </tr>  
+							<?php } 
+									while ($row=mysqli_fetch_assoc($search_query));
+									} 
+								else{ ?>
+							
+							<tr><td>
+							<?php echo "No results found"; ?>
+							</td>
+							<td></td>
+							<td></td>
+							<td></td>
+							</tr>
+							<?php	}
+							?> 
+					</table>         
+				
 				</div> <!-- End of /.col-md-2 -->
-				<div class="col-md-4">
-					<div class="block">
-						<div class="product-des">
-							<h4><?php echo $row['tipe_iphone']; ?></h4>
-							<p class="price">Rp <?php echo $row['harga']; ?></p>
-							<p><?php echo $row['spesifikasi']; ?></p>
-							<a class="view-link" href="#"><i class="fa fa-plus-circle"></i>Add To Cart</a>
-						</div>	<!-- End of /.product-des -->
-					</div> <!-- End of /.block -->
-				</div>	<!-- End of /.col-md-4 -->
 			</div>	<!-- End of /.row -->
 			<div class="row">
 				<div class="col-md-3">

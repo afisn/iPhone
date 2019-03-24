@@ -39,20 +39,20 @@
 	<section id="top">
 		<div class="container">
 			<div class="row">
-				<div class="col-md-7">
+				<div class="col-md-8">
 					<p class="contact-action"><i class="fa fa-phone-square"></i>IN CASE OF ANY QUESTIONS, CALL THIS NUMBER: <strong>+565 975 658</strong></p>
 				</div>
-				<div class="col-md-3 clearfix">
+				<div class="col-md-2 clearfix">
 					<ul class="login-cart">
-					<li>
+						<li>
 							<?php if(isset($_SESSION['status'])==false){?>
 							<a data-toggle="modal" data-target="#myModal" href="#">
-								<i class="fa fa-user"></i>
+							<i class="fa fa-user"></i>
 								Login / Register
 							</a>
 							<?php }else{?>
-								<a  href="admin/logout.php">
-								<i class="fa fa-user"></i>
+							<a  href="admin/logout.php">
+							<i class="fa fa-user"></i>
 								Logout
 							</a>
 							<?php }?>
@@ -62,11 +62,10 @@
 				<div class="col-md-2">
 					<div class="search-box">
 						<div class="input-group">
-					    	<input placeholder="Search Here" type="text" class="form-control">
-					      	<span class="input-group-btn">
-					        	<button class="btn btn-default" type="button"></button>
-					      	</span>
-					    </div><!-- /.input-group -->
+						<form class="form-inline" method="post" action="search.php" >
+					    	<input name="search" placeholder="Search Here" type="text" class="form-control">
+						</form>
+					    </div><!--/.input-group-->
 					</div><!-- /.search-box -->
 				</div>
 			</div> <!-- End Of /.row -->
@@ -96,8 +95,8 @@
 											<input placeholder="E-mail address"  type="text" id="email_create" name="email_create" value="" class="account_input" required>
 					                    </span>
 									</p>
-									<p class="submit">
-										<button class="btn btn-primary">Create Your Account</button>
+									<p class="submit" >
+										<button class="btn btn-primary" >Create Your Account</button>
 									</p>
 								</div>
 							</fieldset>
@@ -113,9 +112,6 @@
 									<p class="text">
 									<label for="passwd">Password</label>
 										<span><input placeholder="Password" type="password" id="passwd" name="passwd" value="" class="account_input"></span>
-									</p>
-									<p class="lost_password">
-										<a href="#popab-password-reset" class="popab-password-link">Forgot your password?</a>
 									</p>
 									<p class="submit">
 										<button class="btn btn-success">Log in</button>
@@ -295,8 +291,8 @@
                                                 <tr>  
                                                     <td><?php echo $values["item_name"]; ?></td>  
                                                     <td><?php echo $values["item_quantity"]; ?></td>  
-                                                    <td>$ <?php echo $values["item_price"]; ?></td>  
-                                                    <td>$ <?php echo number_format($values["item_quantity"] * $values["item_price"], 2); ?></td>  
+                                                    <td>Rp <?php echo $values["item_price"]; ?></td>  
+                                                    <td>Rp <?php echo number_format($values["item_quantity"] * $values["item_price"], 2); ?></td>  
                                                     <td><a href="shopping.php?action=delete&id=<?php echo $values["item_id"]; ?>"><span class="text-danger">Remove</span></a></td>  
                                                 </tr>  
                                                 <?php  
