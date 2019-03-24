@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Mar 24, 2019 at 03:41 AM
+-- Generation Time: Mar 24, 2019 at 06:57 AM
 -- Server version: 10.1.38-MariaDB
 -- PHP Version: 7.3.3
 
@@ -57,6 +57,18 @@ CREATE TABLE `tb_polling` (
   `address` varchar(100) DEFAULT NULL,
   `tipe_iphone` varchar(100) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `tb_polling`
+--
+
+INSERT INTO `tb_polling` (`id_polling`, `nama`, `address`, `tipe_iphone`) VALUES
+(1, '', '', 'iPhone 5s'),
+(2, '', '', 'iPhone 5s'),
+(3, '', '', 'iPhone 5s'),
+(4, '', '', 'iPhone 5s'),
+(5, '', '', 'iPhone 5s'),
+(6, '', '', 'iPhone 5s');
 
 -- --------------------------------------------------------
 
@@ -149,7 +161,7 @@ ALTER TABLE `tb_news`
 -- AUTO_INCREMENT for table `tb_polling`
 --
 ALTER TABLE `tb_polling`
-  MODIFY `id_polling` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id_polling` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- AUTO_INCREMENT for table `tb_produk`
@@ -161,7 +173,7 @@ ALTER TABLE `tb_produk`
 -- AUTO_INCREMENT for table `tb_user`
 --
 ALTER TABLE `tb_user`
-  MODIFY `id_user` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id_user` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
